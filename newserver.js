@@ -25,7 +25,13 @@ const subcategorieRouter=require('./routers/subcategorieRouter');
 const commandeRouter=require('./routers/commandeRouter');
 
 
+const sellerRouter=require('./routers/sellerRouter');
 
+
+
+
+
+app.use('/seller',sellerRouter);
 
 
 app.use('/subcategorie',subcategorieRouter);

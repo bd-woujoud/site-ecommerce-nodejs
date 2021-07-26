@@ -13,10 +13,10 @@ route.get('/getUser',validUser.validateUser,userController.getAllUser);
 route.get('/getUserById/:id',userController.getUserById);
 route.delete('/deleteUserById/:id',userController.deleteUserById);
 route.put('/updateUserById/:id',userController.updateUserById);
-route.delete('/removeAll/',userController.removeUser);
+
 route.post('/signin',userController.signin);
 route.post('/refrech',userController.refreshToken);
 route.post('/logout',userController.LogOut);
 route.post('/sendMail',userController.sendMail);
-route.post('/forgetPass',userController.forgetPass);
+
 module.exports=route;
