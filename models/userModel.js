@@ -87,6 +87,16 @@ const userSchema = new Schema({
 
     },
 
+
+
+
+    resetLink:{
+
+        type:String
+
+
+    },
+
 commandes:[{
 
 type:mongoose.Schema.Types.ObjectId,////plusieur  relation entre commande et user (1..*) donc juste nzido [] bech ywali 3anna tableau d'objet

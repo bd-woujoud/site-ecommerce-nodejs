@@ -4,8 +4,8 @@ const userModel=require('../models/userModel')
 const bcrypt =require('bcrypt')
 const SaltRounds =10
 var jwt = require("jsonwebtoken");
-
-
+var _ = require("lodash");
+var nodemailer = require("nodemailer");
 
 var refreshTokens = {}//dectation de nouveau jwt
 
@@ -199,7 +199,7 @@ sendMail: function (req, res) {
     service: 'gmail',
     auth: {
       user: 'wwwwboudhina@gmail.com',
-      pass: '********'
+      pass: 'zoula1983'
     }
   });
   
@@ -238,6 +238,102 @@ var mailOptions = {
 
 
 
+
+  forgotPassword: function (req, res) {
+    const Email = req.body.email;
+    userModel.findOne({ email: Email }, (err, user) => {
+        if (err || !user) {
+            return res.json({
+                status: 'Email error',
+                error: 'Email does not exist',
+            });
+        }
+        const token = jwt.sign({ _id: user._id }, req.app.get('secretKey'), {
+            expiresIn: '20min',
+        });
+        console.log(token);
+        var data = {
+            from: '*****',
+            to: Email,
+            subject: 'Reset Password',
+
+            text: `"http://localhost:3000/reset-password/${token}`,
+            // text:  voila = {token}
+        };
+        return userModel.findOneAndUpdate(
+            { email: Email },
+            { resetLink: token },
+            (err, info) => {
+                var transporter4 = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'wwwwboudhina@gmail.com',
+                        pass: 'zoula1983',
+                    },
+                });
+                transporter4.sendMail(data, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                        return res.json({ err: 'Error in email' });
+                    } else {
+                        return res.json({
+                            status: 'Success',
+                            message: 'Email has been send',
+                        });
+                    }
+                });
+            }
+        );
+    });
+},
+
+
+resetPassword: function (req, res) {
+    resetLink = req.body.resetLink;
+    newPass = req.body.newPass;
+    if (resetLink) {
+        jwt.verify(
+            resetLink,
+            req.app.get('secretKey'),
+            function (err, decodeData) {
+                if (err) {
+                    return res.json({
+                        message: 'invalid token',
+                        error: 'Incorrect token or it is expired',
+                    });
+                }
+                userModel.findOne({ resetLink: resetLink }, (err, user) => {
+                    if (err || !user) {
+                        return res.json({
+                            message: 'invalid token',
+                            error: 'User with this token does not exist',
+                        });
+                    }
+                    const obj = {
+                        password: newPass,
+                    };
+                    user = _.extend(user, obj);
+                    user.save((err, result) => {
+                        if (err) {
+                            return res.status(400).json({
+                                error: 'Reset password error',
+                            });
+                        } else {
+                            return res.status(200).json({
+                                status: 'Success',
+                                message: 'Password has been changed!',
+                            });
+                        }
+                    });
+                });
+            }
+        );
+    } else {
+        return res.status(401).json({
+            error: 'Authentification error',
+        });
+    }
+},
 
 
 

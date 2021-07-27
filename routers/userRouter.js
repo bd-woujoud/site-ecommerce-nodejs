@@ -18,5 +18,7 @@ route.post('/signin',userController.signin);
 route.post('/refrech',userController.refreshToken);
 route.post('/logout',userController.LogOut);
 route.post('/sendMail',userController.sendMail);
+route.post('/forgotPass',userController.forgotPassword);
+route.post('/resetPass',userController.resetPassword);
 
 module.exports=route;
