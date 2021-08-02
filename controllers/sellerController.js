@@ -26,12 +26,12 @@ module.exports={
     getAllseller: async (req, res) => {
         try { 
          
-          const result = await sellerModel.find({}).populate('product').populate('categorie');
+          const result = await sellermodel.find({}).populate('product').populate('categorie');
           res.json({message:'all seller in bd', data:result,statut:200});
        
         } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:Null,statut:500});
+          res.json({message:'error', data:null,statut:500});
         }
     },
   
@@ -43,12 +43,12 @@ module.exports={
   
       try { 
        
-        const result = await sellerModel.findById({_id:req.params.id}).populate('product').populate('categorie');
+        const result = await sellermodel.findById({_id:req.params.id}).populate('product').populate('categorie');
         res.json({message:'seller in bd', data:result,statut:200});
       
       } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:Null,statut:500});
+        res.json({message:'error', data:null,statut:500});
       }
     },
 
@@ -62,7 +62,7 @@ module.exports={
           res.json({message:'seller deleted', data:result,statut:200});
       } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:Null,statut:500});
+          res.json({message:'error', data:null,statut:500});
       }
   },
 
@@ -73,7 +73,7 @@ module.exports={
         res.json({message:'seller updated', data:result,statut:200});
     } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:Null,statut:500});
+        res.json({message:'error', data:null,statut:500});
     }
 }
 

@@ -6,7 +6,7 @@ const SaltRounds =10
 var jwt = require("jsonwebtoken");
 var _ = require("lodash");
 var nodemailer = require("nodemailer");
-
+var fs = require("fs");
 var refreshTokens = {}//dectation de nouveau jwt
 
 module.exports={
@@ -59,10 +59,10 @@ getUserById :function(req,res){
 
         if (err) {
             
-            res.json({message:'error get one user'+err, data:Null ,status:500})
+            res.json({message:'error get one user'+err, data:null ,status:500})
         } else {
             
-            res.json({message:'one user in system',data:userModel.length,status:200})
+            res.json({message:'one user in system',data:users,status:200})
         
         }
         
@@ -76,7 +76,7 @@ getUserById :function(req,res){
 
 deleteUserById :function(req,res){
 
-    userModel.findByIdAndDelet({_id:req.params.id},(err,users)=>{
+    userModel.findByIdAndDelete({_id:req.params.id},(err,users)=>{
 
         if (err) {
             
@@ -198,8 +198,8 @@ sendMail: function (req, res) {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'wwwwboudhina@gmail.com',
-      pass: 'zoula1983'
+      user: '*******',
+      pass: '********'
     }
   });
   
@@ -213,12 +213,26 @@ sendMail: function (req, res) {
 //send dynamique
 
 var mailOptions = {
-  //from: req.body.from,
+  from: req.body.from,
   to: req.body.to,
   subject:req.body.subject,
   text:req.body.text,
   
 
+  attachments: [{
+
+      
+
+   
+          /*attachements statique*/
+  filename: 'Forest.png',
+    path: 'C:/Users/Wejdane/Downloads/Forest.jpg',
+    cid: 'uniq-Forest.jpg'
+  
+
+
+
+}],
 
       };
 
@@ -257,9 +271,10 @@ var mailOptions = {
             to: Email,
             subject: 'Reset Password',
 
-            text: `"http://localhost:3000/reset-password/${token}`,
+            text: `http://localhost:3000/reset-password/${token}`,
             // text:  voila = {token}
         };
+        
         return userModel.findOneAndUpdate(
             { email: Email },
             { resetLink: token },
@@ -267,8 +282,8 @@ var mailOptions = {
                 var transporter4 = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: 'wwwwboudhina@gmail.com',
-                        pass: 'zoula1983',
+                        user: '***********',
+                        pass: '********',
                     },
                 });
                 transporter4.sendMail(data, function (error, info) {
@@ -286,6 +301,7 @@ var mailOptions = {
         );
     });
 },
+
 
 
 resetPassword: function (req, res) {
@@ -334,6 +350,7 @@ resetPassword: function (req, res) {
         });
     }
 },
+
 
 
 

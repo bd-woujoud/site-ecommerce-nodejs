@@ -7,7 +7,7 @@ const route= express.Router();
 route.post('/addseller',sellerController.createseller);
 route.get('/getseller',sellerController.getAllseller);
 route.get('/getsellerById/:id',sellerController.getsellerById);
-route.delete('/deleteseller/:id',sellerController.deleteseller);
+route.delete('/deletesellerById/:id',sellerController.deleteseller);
 route.put('/updateseller/:id',sellerController.updateseller);
 
 

@@ -17,7 +17,7 @@ id_sub:{
 product:[{
 
     type:mongoose.Schema.Types.ObjectId,
-    ref:"categorie"
+    ref:"product"
     
     
     }],

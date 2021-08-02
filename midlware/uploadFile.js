@@ -38,7 +38,7 @@ var storage = multer.diskStorage({
    const  fileFilter = function (req, file, callback) {
         var ext = path.extname(file.originalname);
         if( ext !== '.png',ext !== '.jpeg',ext !== '.JPG',) {
-            return callback(new Error('Only images are allowed'))
+            return callback(new Error('Only images are allowed')) na7ina el filter hedha 5ater 7atinah nafso fel product controller
         }
 
         if (file.mimetype == "text/*") {
@@ -51,7 +51,7 @@ var storage = multer.diskStorage({
         callback(null, true)
     }
  cé le meme que cidessous sauf que on a fait deux filter sur image et pdf
-*/
+
 const fileFilter = (req, file, cb) => {  //function to control which files are accepted
   if (file.mimetype == 'image/jpeg' || file.mimetype == 'application/pdf') {  //mimetype of the file
       cb(null, true);
@@ -59,11 +59,11 @@ const fileFilter = (req, file, cb) => {  //function to control which files are a
       cb(null, false);
   } 
 }
-    
+    */
      
 
 
-var upload = multer({ storage: storage ,fileFilter:fileFilter})
+var upload = multer({ storage: storage /*fileFilter:fileFilter*/})
 module.exports=upload
 
 

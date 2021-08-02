@@ -1,14 +1,12 @@
 const bodyParser = require('body-parser')
 const commandeModel = require('../models/commandeModel')
-
+const userModel = require('../models/userModel')
 
 
 
 module.exports={
 
 
-
-    
     createcommande: async (req, res) => {
         try { 
           const commande = new commandeModel(req.body);
@@ -17,7 +15,7 @@ module.exports={
           res.json({message:'new commande created', data:result,statut:200});
         } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:Null,statut:500});
+          res.json({message:'error', data:null,statut:500});
         }
     },
 
@@ -32,7 +30,7 @@ module.exports={
        
         } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:Null,statut:500});
+          res.json({message:'error', data:null,statut:500});
         }
     },
   
@@ -49,7 +47,7 @@ module.exports={
       
       } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:Null,statut:500});
+        res.json({message:'error', data:null,statut:500});
       }
     },
   
@@ -64,7 +62,7 @@ module.exports={
           res.json({message:'commande deleted', data:result,statut:200});
       } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:Null,statut:500});
+          res.json({message:'error', data:null,statut:500});
       }
   },
 
@@ -75,7 +73,7 @@ module.exports={
         res.json({message:'commande updated', data:result,statut:200});
     } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:Null,statut:500});
+        res.json({message:'error', data:null,statut:500});
     }
 },
 
@@ -87,12 +85,54 @@ removecommande: async (req,res) => {
       res.json({message:'commande removed', data:result,statut:200});
   } catch (error) {
       console.log(error.message);
-      res.json({message:'error', data:Null,statut:500});
+      res.json({message:'error', data:null,statut:500});
   }
-}
+},
 
 
-}
+
+
+pushproduit: async (req, res) => {
+
+
+    try { 
+       
+      const result = await commandeModel.updateOne( { _id: req.params.id }, { $push: { produit: req.body.produit }});/*ajout d'un nouveau produit au tableau commande::produit meme nom de relation qui se trouve au schema commande*/
+      
+      res.json({message:'product pushed', data:result,statut:200});
+
+    }
+
+    
+    catch (error) {
+      console.log(error.message);
+      res.json({message:'error', data:null,statut:500});
+    }
+  },
+
+
+
+  pullproduit: async (req, res) => {
+
+
+    try { 
+       
+      const result = await commandeModel.updateOne( { _id: req.params.id }, { $pull: { produit: req.body.produit }});/*suprimé un  produit au tableau commande::produit meme nom de relation qui se trouve au schema commande*/
+      
+      res.json({message:'product pulled'})
+    }
+
+    
+    catch (error) {
+      console.log(error.message);
+      res.json({message:'error', data:null,statut:500});
+    }
+  } 
+  
+  }
+
+  
+
 
 
 

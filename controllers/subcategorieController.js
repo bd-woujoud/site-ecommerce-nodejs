@@ -26,12 +26,12 @@ module.exports={
     getAllsubcategorie: async (req, res) => {
         try { 
          
-          const result = await subcategorieModel.find({}).populate('product').populate('categorie');
+          const result = await subcategoriemodel.find({}).populate('product').populate('categorie');
           res.json({message:'all subcategorie in bd', data:result,statut:200});
        
         } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:Null,statut:500});
+          res.json({message:'error', data:null,statut:500});
         }
     },
   
@@ -43,12 +43,12 @@ module.exports={
   
       try { 
        
-        const result = await subcategorieModel.findById({_id:req.params.id}).populate('product').populate('categorie');
+        const result = await subcategoriemodel.findById({_id:req.params.id}).populate('product').populate('categorie');
         res.json({message:'subcategorie in bd', data:result,statut:200});
       
       } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:Null,statut:500});
+        res.json({message:'error', data:null,statut:500});
       }
     },
 
@@ -62,7 +62,7 @@ module.exports={
           res.json({message:'subcategorie deleted', data:result,statut:200});
       } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:Null,statut:500});
+          res.json({message:'error', data:null,statut:500});
       }
   },
 
@@ -73,7 +73,7 @@ module.exports={
         res.json({message:'subcategorie updated', data:result,statut:200});
     } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:Null,statut:500});
+        res.json({message:'error', data:null,statut:500});
     }
 },
 
@@ -85,7 +85,7 @@ removesubcategorie: async (req,res) => {
       res.json({message:'subcategorie removed', data:result,statut:200});
   } catch (error) {
       console.log(error.message);
-      res.json({message:'error', data:Null,statut:500});
+      res.json({message:'error', data:null,statut:500});
   }
 }
 

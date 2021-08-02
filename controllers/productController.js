@@ -1,7 +1,7 @@
 
 const bodyParser = require('body-parser')
 const productModel=require('../models/productModel')
-
+const nodemailer=require('nodemailer')
 module.exports={
 
 
@@ -10,7 +10,7 @@ createProduct:function(req,res){
     //productModel.create(req.body,function(err,product){
 
     
-
+  console.log(req.body)
 
             let img =req.file
             console.log('fiiiiiiilllleee',req.file.mimetype);
@@ -23,11 +23,12 @@ createProduct:function(req,res){
                 price:req.body.price,
                 description:req.body.description,
                 image:img.filename
-              },function(err,user){
+               
+              },function(err,product){
                   if (err) {
                       res.json({message:'error add model'+err,data:null,status:500})
                   } else {
-                      res.json({message:'Model created successfully',data:user,status:200})
+                      res.json({message:'Model created successfully',data:product,status:200})
                   }
               })
             }
@@ -93,27 +94,6 @@ getproductById :function(req,res){
 
 
 
-removeproduct :function(req,res){
-
-   
-
-    productModel.remove({},(err,product)=>{
-        
-        if (err) {
-            
-            res.json({message:'error removed product'+err,data:null ,status:500})
-        } else {
-            
-            res.json({message:'product remove successfuly', data:product,status:200})
-        
-        }
-        
-        })
-        
-
-
-} ,
-
 
 
 deleteproductById :function(req,res){
@@ -159,7 +139,47 @@ updateproductById :function(req,res){
         
 
 
-} 
+} ,
+
+
+sendimage: function (req, res) {
+    var data = req.body;
+    var smtpTransport = nodemailer.createTransport({
+    service: 'Gmail',
+  
+    auth: {
+    user: 'wwwwboudhina@gmail.com',
+    pass: 'zoula1983'
+    }
+    });
+
+    var mailOptions = {
+    from: data.email,
+    
+    to: 'wejdenbdn94@gmail.com',
+    subject: data.title,
+    html: `<p>${data.email}</p>
+    <p>${data.message}</p>`,
+    attachments: [
+    {
+    filename: 'image.png',
+    contentType:  'image/jpeg',
+  
+    }
+    ]
+    };
+
+    smtpTransport.sendMail(mailOptions,
+    (error, response) => {
+    if (error) {
+    res.status(400).send(error)
+    } else {
+    res.send('Success')
+    }
+    smtpTransport.close();
+    });
+    }
+
 
 
 }

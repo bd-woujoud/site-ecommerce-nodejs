@@ -12,7 +12,7 @@ route.post('/addproduct',upload.single('image'), productController.createProduct
 route.get('/findallproduct',productController.getAllproduct)
 route.get('/findproductbyid/:id',productController.getproductById)
 route.delete('/deleteproductById/:id',productController.deleteproductById)
-route.put('/update/:id',productController.updateproductById)
+route.put('/updateproduct/:id',productController.updateproductById)
 
 
 

@@ -71,7 +71,7 @@ const userSchema = new Schema({
 
     phone : {
 
-        type:String,     // phone, champ non obligatoire kanet nuber w badaltha string bech inajem ya9ra les tuiret et les espaces
+        type:Number,     // phone, champ non obligatoire kanet nuber w badaltha string bech inajem ya9ra les tuiret et les espaces
         minLength:8,
         maxLength:20,
 

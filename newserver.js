@@ -1,9 +1,12 @@
 
 const express=require('express');
 const database = require('./config/database')
+var swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./config/swagger.json');
 const bodyParser=require('body-parser')
 
 const port=3000
+
 const app=express();
 
 
@@ -17,6 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 const userRouter=require('./routers/userRouter');
 const productRouter=require('./routers/productRouter');
@@ -26,9 +31,6 @@ const commandeRouter=require('./routers/commandeRouter');
 
 
 const sellerRouter=require('./routers/sellerRouter');
-
-
-
 
 
 app.use('/seller',sellerRouter);
