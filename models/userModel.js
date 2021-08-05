@@ -56,13 +56,13 @@ const userSchema = new Schema({
         type:String,
         required:true  ,
 
-        // validate: {/*pour tester sur les caractére  regex*/
-        //     validator: function(password) {
-        //       return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password);
-        //     },
+        validate: {/*pour tester sur les caractére  regex*/
+            validator: function(password) {
+              return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password);
+            },
 
-        //     message: props /* propse el message eli bech yeketbo*/ => `${props.value} is not a correct password`
-        //   },
+            message: props /* propse el message eli bech yeketbo*/ => `${props.value} is not a correct password`
+          },
  
     },
 

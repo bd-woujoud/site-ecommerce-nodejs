@@ -1,15 +1,16 @@
 
 
 const userController=require('../controllers/userController');
-const express=require('express');
+const express=require ('express');
 
 const validUser = require('../midlware/validUser');
+const pagination = require('../midlware/pagination');
 
 const route= express.Router();
 
 route.post('/addUser',userController.createUser);
 
-route.get('/getUser'/*validUser.validateUser*/,userController.getAllUser);
+route.get('/getUser',/*validUser.validateUser,*/userController.getAllUser);
 route.get('/getUserById/:id',userController.getUserById);
 route.delete('/deleteUserById/:id',userController.deleteUserById);
 route.put('/updateUserById/:id',userController.updateUserById);

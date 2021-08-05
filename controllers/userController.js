@@ -34,7 +34,28 @@ if (err) {
 
 
 
-getAllUser:function(req,res){
+getAllUser: async(req,res)=>{
+
+    /// const limit =3;/*pagination*/
+     // const skip0 =;
+   /*  page=req.params.page;
+     const PAGE_SIZE = 2;                   // Similar to 'limit'
+     const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
+     
+        userModel.find({}).skip(skip).limit(PAGE_SIZE).populate("id_commande").exec((err,users)=>{
+
+            if(err){
+
+                res.json({message:'error get all users'+err,data:null,status:500})
+                
+            }else{
+
+                res.json({size:users.length , message:'all users in system',size:users.length, data:users,status:200})
+                
+            }
+    })
+    */
+
 
 
 userModel.find({}).populate('commandes','adresse_cmd ').exec((err,users)=>{
@@ -101,7 +122,7 @@ updateUserById :function(req,res){
 
    
 
-    userModel.updateOne({_id:req.params.id},req.body,(err,users)=>{//bech naccedi lel contenu lkol mte3 lbody w nbadel kima n7eb kima n7eb
+    userModel.updateOne({_id:req.params.id},req.body,{runValidators: true}/*runvalidator pour respecterla validation au fonction update*/,(err,users)=>{//bech naccedi lel contenu lkol mte3 lbody w nbadel kima n7eb kima n7eb
         //userModel.updateOne({_id:req.params.id},{nom:req.body.nom,prenom:req.body.prenom},(err,users)=>{ ::bech tbadali el nom wel prenom eli fel id n...
         if (err) {
             
@@ -160,7 +181,7 @@ updateUserById :function(req,res){
     refreshToken: function (req, res) {
       var id = req.body._id
       var refreshToken = req.body.refreshToken
-      // console.log('id',id)
+       console.log('inBody',req.body)
       console.log('refreshTokens',(refreshTokens[refreshToken] == id))
       console.log('refresh',(refreshToken in refreshTokens)) 
       if ((refreshToken in refreshTokens) && (refreshTokens[refreshToken] == id)) {
@@ -198,8 +219,8 @@ sendMail: function (req, res) {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: '*******',
-      pass: '********'
+      user: 'wwwwboudhina@gmail.com',
+      pass: 'zoula1983',
     }
   });
   
@@ -218,21 +239,16 @@ var mailOptions = {
   subject:req.body.subject,
   text:req.body.text,
   
-
+/*
   attachments: [{
 
-      
-
-   
-          /*attachements statique*/
-  filename: 'Forest.png',
+          
+    filename: 'Forest.png',
     path: 'C:/Users/Wejdane/Downloads/Forest.jpg',
     cid: 'uniq-Forest.jpg'
   
 
-
-
-}],
+}],*/
 
       };
 
@@ -247,8 +263,6 @@ var mailOptions = {
   
         
   },
-
-
 
 
 
@@ -282,8 +296,8 @@ var mailOptions = {
                 var transporter4 = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: '***********',
-                        pass: '********',
+                        user: "wwwwboudhina@gmail.com",
+                        pass: 'zoula1983',
                     },
                 });
                 transporter4.sendMail(data, function (error, info) {
@@ -327,9 +341,13 @@ resetPassword: function (req, res) {
                     }
                     const obj = {
                         password: newPass,
+
+                        
                     };
                     user = _.extend(user, obj);
                     user.save((err, result) => {
+
+                        console.log(result)
                         if (err) {
                             return res.status(400).json({
                                 error: 'Reset password error',

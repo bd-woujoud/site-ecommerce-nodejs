@@ -57,8 +57,16 @@
           }
         }
       },
-      "/users/getUser": {
-   
+      "/users/getUser/{page}": {
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
         "get": {
           "tags": [
             "Users"
@@ -162,11 +170,197 @@
           }
         }
       },
+      "/users/signin": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "connect  user ",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to connect",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "user connected",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+ 
+      "/users/refrech": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "refrech token ",
+          "parameters": [
+            {
+              "name": "x-access-token",
+              "in": "body",
+              "description": "refrech token",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "token refreched",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
 
+      "/users/logout": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "logout  user ",
+          "parameters": [
+            {
+              "in": "header",
+              "name": "X-acess-token",
+              "description": "token expired",
+              "schema": {
+                "type": "string",
+                "format": "uuid",
+              "required": "true"
+              
+              }
+            },
+            {
+              "in": "body",
+              "name": "X-refrechToken",
+              "description": "refrechtoken expired",
+              "schema": {
+                "type": "string",
+                "format": "uuid",
+              "required": "true"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "user disconnected",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
 
+      "/users/sendMail": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "send email ",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "email that we want to sended",
+              "schema": {
+                "$ref": "#/definitions/sendmail"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "email sended",
+              "schema": {
+                "$ref": "#/definitions/sendmail"
+              }
+            }
+          }
+        }
+      },
 
-
-
+      "/users/forgotPass": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": " forgot password ",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "forgot password",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Email has been send",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/users/resetPass": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Reset password  ",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Reset password ",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Password has been changed!",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
 
 
       "/categorie/addcategorie": {
@@ -585,6 +779,78 @@
           }
         }
       },
+      "/commande/pushproduit/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of commande that we want to pushed",
+            "type": "string"
+          }
+        ],
+  
+        "put": {
+          "summary": "Update commande with new product",
+          "tags": [
+            "commande"
+          ],
+          "parameters": [
+            {
+              "name": "commande",
+              "in": "body",
+              "description": "commande with new product",
+              "schema": {
+                "$ref": "#/definitions/commande"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "commande is updated",
+              "schema": {
+                "$ref": "#/definitions/commande"
+              }
+            }
+          }
+        }
+      },
+      "/commande/pullproduit/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of commande that we want to cancelled",
+            "type": "string"
+          }
+        ],
+  
+        "put": {
+          "summary": "Update commande with cancellation product",
+          "tags": [
+            "commande"
+          ],
+          "parameters": [
+            {
+              "name": "commande",
+              "in": "body",
+              "description": "product withdrawn",
+              "schema": {
+                "$ref": "#/definitions/commande"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "commande is updated",
+              "schema": {
+                "$ref": "#/definitions/commande"
+              }
+            }
+          }
+        }
+      },
 
 
 
@@ -652,7 +918,7 @@
           }
         }
       },
-      "/product/findallproduct": {
+      "/product/findallproduct/{page}/{limit}": {
    
         "get": {
           "tags": [
@@ -1175,8 +1441,36 @@
       "sellers": {
         "type": "array",
         "$ref": "#/definitions/seller"
+      },
+      "sendmail": {
+
+    
+
+        "properties": {
+
+     
+          "to": {
+            "type": "string",
+            "uniqueItems": true
+          },
+
+          "subject": {
+            "type": "string"
+        
+          },
+          
+          "text": {
+            "type": "string"
+        
+          }
+
+        }
+      },
+  
+      "mailer": {
+        "type": "array",
+        "$ref": "#/definitions/sendmail"
       }
 
-
     }
-  }
+}
