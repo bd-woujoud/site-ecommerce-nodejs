@@ -4,3 +4,4 @@ const mongoDB = 'mongodb://localhost/bootcamp'; // bootcamp est le nom de la bas
 mongoose.connect(mongoDB,{ useNewUrlParser: true ,useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
 module.exports = mongoose;
+

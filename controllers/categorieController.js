@@ -16,11 +16,11 @@ module.exports={
           const result = await categorie.save();
 
         //   const result = await productModel.create(req.body)
-          res.json({message:'new categorie created', data:result,statut:200});
+          res.json({message:'new categorie created', data:result,status:200});
         } catch (error) {
 
           console.log(error.message);
-          res.json({message:'error', data:null,statut:500});
+          res.json({message:'error', data:null,status:500});
         }
     },
         
@@ -31,11 +31,11 @@ module.exports={
       try { 
        
         const result = await categoriemodel.find({}).populate('subcategorie').exec(err,users);
-        res.json({message:'all categorie in bd', data:result,statut:200});
+        res.json({message:'all categorie in bd', data:result,status:200});
      
       } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:null,statut:500});
+        res.json({message:'error', data:null,status:500});
       }
   },
 
@@ -48,11 +48,11 @@ module.exports={
     try { 
      
       const result = await categoriemodel.find({}).populate('subcategorie').exec(err,users);
-      res.json({message:'categorie in bd', data:result,statut:200});
+      res.json({message:'categorie in bd', data:result,status:200});
     
     } catch (error) {
       console.log(error.message);
-      res.json({message:'error', data:null,statut:500});
+      res.json({message:'error', data:null,status:500});
     }
   },
 
@@ -63,10 +63,10 @@ module.exports={
     deletecategorie: async (req,res) => {
       try{
           const result = await categoriemodel.findByIdAndDelete({_id:req.params.id})
-          res.json({message:'categorie deleted', data:result,statut:200});
+          res.json({message:'categorie deleted', data:result,status:200});
       } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:null,statut:500});
+          res.json({message:'error', data:null,status:500});
       }
   },
 
@@ -74,10 +74,10 @@ module.exports={
   updatecategorie: async (req,res) => {
     try{
         const result = await categoriemodel.updateOne({_id:req.params.id},req.body)
-        res.json({message:'categorie ', data:result,statut:200});
+        res.json({message:'categorie ', data:result,status:200});
     } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:null,statut:500});
+        res.json({message:'error', data:null,status:500});
     }
 },
 

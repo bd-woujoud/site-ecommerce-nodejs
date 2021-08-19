@@ -1,6 +1,7 @@
 
 const bodyParser = require('body-parser')
 const userModel=require('../models/userModel')
+const commandeModel=require('../models/commandeModel')
 const bcrypt =require('bcrypt')
 const SaltRounds =10
 var jwt = require("jsonwebtoken");
@@ -219,8 +220,8 @@ sendMail: function (req, res) {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'wwwwboudhina@gmail.com',
-      pass: 'zoula1983',
+      user: '*******',
+      pass: '*******',
     }
   });
   

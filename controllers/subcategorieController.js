@@ -27,11 +27,11 @@ module.exports={
         try { 
          
           const result = await subcategoriemodel.find({}).populate('product').populate('categorie');
-          res.json({message:'all subcategorie in bd', data:result,statut:200});
+          res.json({message:'all subcategorie in bd', data:result,status:200});
        
         } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:null,statut:500});
+          res.json({message:'error', data:null,status:500});
         }
     },
   
@@ -44,11 +44,11 @@ module.exports={
       try { 
        
         const result = await subcategoriemodel.findById({_id:req.params.id}).populate('product').populate('categorie');
-        res.json({message:'subcategorie in bd', data:result,statut:200});
+        res.json({message:'subcategorie in bd', data:result,status:200});
       
       } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:null,statut:500});
+        res.json({message:'error', data:null,status:500});
       }
     },
 
@@ -59,10 +59,10 @@ module.exports={
     deletesubcategorie: async (req,res) => {
       try{
           const result = await subcategoriemodel.findByIdAndDelete({_id:req.params.id})
-          res.json({message:'subcategorie deleted', data:result,statut:200});
+          res.json({message:'subcategorie deleted', data:result,status:200});
       } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:null,statut:500});
+          res.json({message:'error', data:null,status:500});
       }
   },
 
@@ -70,10 +70,10 @@ module.exports={
   updatesubcategorie: async (req,res) => {
     try{
         const result = await subcategoriemodel.updateOne({_id:req.params.id},req.body,)
-        res.json({message:'subcategorie updated', data:result,statut:200});
+        res.json({message:'subcategorie updated', data:result,status:200});
     } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:null,statut:500});
+        res.json({message:'error', data:null,status:500});
     }
 },
 
@@ -82,10 +82,10 @@ module.exports={
 removesubcategorie: async (req,res) => {
   try{
       const result = await subcategoriemodel.remove()
-      res.json({message:'subcategorie removed', data:result,statut:200});
+      res.json({message:'subcategorie removed', data:result,status:200});
   } catch (error) {
       console.log(error.message);
-      res.json({message:'error', data:null,statut:500});
+      res.json({message:'error', data:null,status:500});
   }
 }
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket io</title>
+</head>
+<body> 
+
+     <h1>Bonjour</h1>
+    <button onclick="send()">send</button>
+    <button onclick="join()">join</button>
+    <input type="text" id="MSG" placeholder="entrer msg">
+
+
+    <script src='/socket.io/socket.io.js'></script>
+    <script>
+        let socket =io()
+
+        socket.on('connect',()=>{  //client side connection
+            console.log('connected')
+
+        });
+
+
+        socket.on(/*'serverEvent'*/'newMsg' ,()=>{ //listening for a server
+            console.log('event recieved')
+        });
+
+
+function join(){// create new room
+
+
+    socket.emit('joinRoom')
+
+};
+
+    function send(){ 
+        
+        ///send event
+            console.log('document',document.getElementById('msg').value)
+            console.log('documentLabel',document.getElementById('new').value)
+            socket.emit("sendMsg",document.getElementById('msg').value);
+            document.getElementById('new').innerHTML=document.getElementById('msg').value
+             
+            }
+    
+      
+    
+     
+       
+    </script>
+  
+</body>
+</html>

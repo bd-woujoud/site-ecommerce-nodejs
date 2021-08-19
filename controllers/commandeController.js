@@ -1,7 +1,7 @@
 const bodyParser = require('body-parser')
 const commandeModel = require('../models/commandeModel')
 const userModel = require('../models/userModel')
-
+const productModel = require('../models/productModel')
 
 
 module.exports={
@@ -12,10 +12,10 @@ module.exports={
           const commande = new commandeModel(req.body);
           const result = await commande.save();
         
-          res.json({message:'new commande created', data:result,statut:200});
+          res.json({message:'new commande created', data:result,status:200});
         } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:null,statut:500});
+          res.json({message:'error', data:null,status:500});
         }
     },
 
@@ -26,11 +26,11 @@ module.exports={
         try { 
          
           const result = await commandeModel.find({}).populate('user').populate('produit');
-          res.json({message:'all commande in bd', data:result,statut:200});
+          res.json({message:'all commande in bd', data:result,status:200});
        
         } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:null,statut:500});
+          res.json({message:'error', data:null,status:500});
         }
     },
   
@@ -43,11 +43,11 @@ module.exports={
       try { 
        
         const result = await commandeModel.findById({_id:req.params.id}).populate('user').populate('produit');
-        res.json({message:'commande in bd', data:result,statut:200});
+        res.json({message:'commande in bd', data:result,status:200});
       
       } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:null,statut:500});
+        res.json({message:'error', data:null,status:500});
       }
     },
   
@@ -59,10 +59,10 @@ module.exports={
     deletecommande: async (req,res) => {
       try{
           const result = await commandeModel.findByIdAndDelete({_id:req.params.id})
-          res.json({message:'commande deleted', data:result,statut:200});
+          res.json({message:'commande deleted', data:result,status:200});
       } catch (error) {
           console.log(error.message);
-          res.json({message:'error', data:null,statut:500});
+          res.json({message:'error', data:null,status:500});
       }
   },
 
@@ -70,10 +70,10 @@ module.exports={
   updatecommande: async (req,res) => {
     try{
         const result = await commandeModel.updateOne({_id:req.params.id},req.body)
-        res.json({message:'commande updated', data:result,statut:200});
+        res.json({message:'commande updated', data:result,status:200});
     } catch (error) {
         console.log(error.message);
-        res.json({message:'error', data:null,statut:500});
+        res.json({message:'error', data:null,status:500});
     }
 },
 
@@ -82,10 +82,10 @@ module.exports={
 removecommande: async (req,res) => {
   try{
       const result = await commandeModel.remove()
-      res.json({message:'commande removed', data:result,statut:200});
+      res.json({message:'commande removed', data:result,status:200});
   } catch (error) {
       console.log(error.message);
-      res.json({message:'error', data:null,statut:500});
+      res.json({message:'error', data:null,status:500});
   }
 },
 
@@ -99,14 +99,14 @@ pushproduit: async (req, res) => {
        
       const result = await commandeModel.updateOne( { _id: req.params.id }, { $push: { produit: req.body.produit }});/*ajout d'un nouveau produit au tableau commande::produit meme nom de relation qui se trouve au schema commande*/
       
-      res.json({message:'product pushed', data:result,statut:200});
+      res.json({message:'product pushed', data:result,status:200});
 
     }
 
     
     catch (error) {
       console.log(error.message);
-      res.json({message:'error', data:null,statut:500});
+      res.json({message:'error', data:null,status:500});
     }
   },
 
@@ -125,7 +125,7 @@ pushproduit: async (req, res) => {
     
     catch (error) {
       console.log(error.message);
-      res.json({message:'error', data:null,statut:500});
+      res.json({message:'error', data:null,status:500});
     }
   } 
   
