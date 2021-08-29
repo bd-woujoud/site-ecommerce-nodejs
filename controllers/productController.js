@@ -1,5 +1,5 @@
 
-const bodyParser = require('body-parser')
+
 const productModel=require('../models/productModel')
 const nodemailer=require('nodemailer')
 module.exports={
@@ -15,7 +15,7 @@ createProduct:function(req,res){
             let img =req.file
             console.log('fiiiiiiilllleee',req.file.mimetype);
             if(img.mimetype!=='image/png'){
-              res.json({msg:'please enter a valid extention'})
+              res.json({msg:'please enter a valid extention'})/////attachement
             }
             else{
               productModel.create({

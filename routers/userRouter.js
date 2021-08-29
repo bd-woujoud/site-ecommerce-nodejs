@@ -8,9 +8,9 @@ const pagination = require('../midlware/pagination');
 
 const route= express.Router();
 
-route.post('/addUser',userController.createUser);
+route.post('/addUser',/*validation.validuser*/userController.createUser);
 
-route.get('/getUser',/*validUser.validateUser,*/userController.getAllUser);
+route.get('/getUser',userController.getAllUser);/*:page*/
 route.get('/getUserById/:id',userController.getUserById);
 route.delete('/deleteUserById/:id',userController.deleteUserById);
 route.put('/updateUserById/:id',userController.updateUserById);

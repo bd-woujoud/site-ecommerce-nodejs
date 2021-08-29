@@ -4,8 +4,10 @@ const bodyParser=require('body-parser')
 var swaggerUi = require('swagger-ui-express'),
 swaggerDocument = require('./config/swagger.json');
 const path = require('path')
-const port = 3000
+var cors = require('cors')
+const port = 5000
 const app = express()
+app.use(cors())
 const server = require('http').createServer(app)
 const io = require('socket.io')(server /* ,{cors:{origin:'*'}} */ )
 app.set('secretKey','bootcamp')
@@ -37,7 +39,7 @@ app.use('/product',productRouter);
 app.use('/categorie',categorieRouter);
 app.use('/commande',commandeRouter);
 
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // express doesn't consider not found 404 as an error so we need to handle 404 explicitly
 // handle 404 error
 app.use(function(req,res, next) {
@@ -79,6 +81,7 @@ app.use(function(req,res, next) {
       });
 
       socket.emit('serverEvent');*/
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 server.listen(port,console.log(`server is running at localhost:${port}`));
+//module.exports=app

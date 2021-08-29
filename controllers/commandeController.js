@@ -1,7 +1,6 @@
-const bodyParser = require('body-parser')
+
 const commandeModel = require('../models/commandeModel')
-const userModel = require('../models/userModel')
-const productModel = require('../models/productModel')
+
 
 
 module.exports={

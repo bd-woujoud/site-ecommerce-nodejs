@@ -33,18 +33,18 @@ const userSchema = new Schema({
     
         type:String,
         unique:[true, 'email  required'],
-        required: [true, 'email not required'],
-        required: [true, 'User mail required'],
+        required: true, 
+        //required: [true, 'User mail required'],
 
-        validate: {/*pour tester sur les caractére  regex*/
+        // validate: {/*pour tester sur les caractére  regex*/
 
-            validator: function(mail) {
-              return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
-            },
+        //     validator: function(mail) {
+        //       return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
+        //     },
 
-            message: props /* propse el message eli bech yeketbo*/ => `${props.value} is not a valid email!`
+        //     message: props /* propse el message eli bech yeketbo*/ => `${props.value} is not a valid email!`
 
-          },
+        //   },
  
           
      },
@@ -54,26 +54,26 @@ const userSchema = new Schema({
     password :{
 
         type:String,
-        required:true  ,
+       required:true  ,
 
-        validate: {/*pour tester sur les caractére  regex*/
-            validator: function(password) {
-              return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password);
-            },
+        // validate: {/*pour tester sur les caractére  regex*/
+        //     validator: function(password) {
+        //       return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password);
+        //     },
 
-            message: props /* propse el message eli bech yeketbo*/ => `${props.value} is not a correct password`
-          },
+        //     message: props /* propse el message eli bech yeketbo*/ => `${props.value} is not a correct password`
+        //   },
  
     },
 
 
 
 
-    phone : {
+    //phone : {
 
-        type:Number,     // phone, champ non obligatoire kanet nuber w badaltha string bech inajem ya9ra les tuiret et les espaces
-        minLength:8,
-        maxLength:20,
+        //type:Number,     
+        // minLength:8,
+        // maxLength:20,
 
 
         //  validate: {/*pour tester sur les caractére  regex*/
@@ -85,7 +85,7 @@ const userSchema = new Schema({
         //    },
 
 
-    },
+    
 
 
 
@@ -99,7 +99,7 @@ const userSchema = new Schema({
 
 commandes:[{
 
-type:mongoose.Schema.Types.ObjectId,////plusieur  relation entre commande et user (1..*) donc juste nzido [] bech ywali 3anna tableau d'objet
+type:mongoose.Schema.Types.ObjectId,////plusieur  relation 
 ref:"commande"
 
 }]

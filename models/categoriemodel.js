@@ -15,14 +15,11 @@ name_categorie:{
 },
 
 
-id_categorie:{
+type_categorie:{
 
     type:String,
     require:true
 },
-
-
-
 
 
 subcategorie:[{

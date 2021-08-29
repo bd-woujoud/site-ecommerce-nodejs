@@ -9,13 +9,17 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "host": "localhost:3000",
+    "host": "localhost:5000",
     "basePath": "",
     "tags": [
       {
         "name": "Users",
         "description": "API for users in the system"
-      }
+      },
+      {
+      "name": "categorie",
+      "description": "API for categorie in the system"
+    }
     ],
     "schemes": [
       "http"
@@ -500,10 +504,6 @@
 
 
 
-
-
-
-
       "/subcategorie/addsubcategorie": {
         "post": {
           "tags": [
@@ -638,9 +638,6 @@
           }
         }
       },
-
-
-
 
 
 
@@ -852,13 +849,7 @@
         }
       },
 
-
-
-
-
-
-
-      
+ 
       "/product/addproduct": {
         "post": {
           "tags": [
@@ -1025,10 +1016,6 @@
       },
 
 
-
-
-
-
       "/seller/addseller": {
         "post": {
           "tags": [
@@ -1164,8 +1151,6 @@
         }
       }
 
-
- 
     },
 
 
@@ -1340,7 +1325,7 @@
 
           "product":{
 
-            "type":"array",
+            "type":"array", 
             "items":{
               "type":"string",
             "x-swagger-mongoose":{

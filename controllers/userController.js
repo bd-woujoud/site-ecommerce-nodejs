@@ -1,7 +1,6 @@
 
-const bodyParser = require('body-parser')
 const userModel=require('../models/userModel')
-const commandeModel=require('../models/commandeModel')
+
 const bcrypt =require('bcrypt')
 const SaltRounds =10
 var jwt = require("jsonwebtoken");
@@ -121,9 +120,7 @@ deleteUserById :function(req,res){
 
 updateUserById :function(req,res){
 
-   
-
-    userModel.updateOne({_id:req.params.id},req.body,{runValidators: true}/*runvalidator pour respecterla validation au fonction update*/,(err,users)=>{//bech naccedi lel contenu lkol mte3 lbody w nbadel kima n7eb kima n7eb
+    userModel.findOneAndUpdate({_id:req.params.id},req.body,{runValidators: true}/*runvalidator pour respecterla validation au fonction update*/,(err,users)=>{//bech naccedi lel contenu lkol mte3 lbody w nbadel kima n7eb kima n7eb
         //userModel.updateOne({_id:req.params.id},{nom:req.body.nom,prenom:req.body.prenom},(err,users)=>{ ::bech tbadali el nom wel prenom eli fel id n...
         if (err) {
             
@@ -135,9 +132,6 @@ updateUserById :function(req,res){
         }
         
         })
-        
-
-
 },
 
 
@@ -179,12 +173,11 @@ updateUserById :function(req,res){
           });
         })
     },
+    
     refreshToken: function (req, res) {
       var id = req.body._id
       var refreshToken = req.body.refreshToken
-       console.log('inBody',req.body)
-      console.log('refreshTokens',(refreshTokens[refreshToken] == id))
-      console.log('refresh',(refreshToken in refreshTokens)) 
+ 
       if ((refreshToken in refreshTokens) && (refreshTokens[refreshToken] == id)) {
           var userId = {
               'id': id
@@ -201,7 +194,6 @@ updateUserById :function(req,res){
 
   LogOut: function (req, res) {
     var refreshToken = req.body.refreshToken
-    // console.log('refreshToken',refreshToken)
     jwt.verify(req.headers['x-access-token'],req.app.get('secretKey'))
     if (refreshToken in refreshTokens) {
         delete refreshTokens[refreshToken]
@@ -220,8 +212,8 @@ sendMail: function (req, res) {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: '*******',
-      pass: '*******',
+      user: 'wwwwboudhina@gmail.com',
+      pass: 'zoula1983',
     }
   });
   
@@ -258,13 +250,12 @@ var mailOptions = {
       res.json({message:'error ' +error});
     } else {
 
-      res.json({message:'Email sent: ' + info.response});
+      res.json({status:200,message:'Email Sent'});
     }
   })
   
         
   },
-
 
 
 
@@ -309,6 +300,7 @@ var mailOptions = {
                         return res.json({
                             status: 'Success',
                             message: 'Email has been send',
+                            data:token//suppression apres unit test
                         });
                     }
                 });

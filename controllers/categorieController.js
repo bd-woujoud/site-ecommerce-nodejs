@@ -1,5 +1,5 @@
-const bodyParser = require('body-parser');
-const { populate } = require('../models/categoriemodel');
+
+
 const categoriemodel = require('../models/categoriemodel')
 
 
@@ -30,7 +30,7 @@ module.exports={
     getAllcategorie: async (req, res) => {
       try { 
        
-        const result = await categoriemodel.find({}).populate('subcategorie').exec(err,users);
+        const result = await (await categoriemodel.find({}).populate('subcategorie'));
         res.json({message:'all categorie in bd', data:result,status:200});
      
       } catch (error) {
@@ -47,11 +47,10 @@ module.exports={
 
     try { 
      
-      const result = await categoriemodel.find({}).populate('subcategorie').exec(err,users);
+      const result = await categoriemodel.findById({_id:req.params.id}).populate('subcategorie');
       res.json({message:'categorie in bd', data:result,status:200});
     
     } catch (error) {
-      console.log(error.message);
       res.json({message:'error', data:null,status:500});
     }
   },
@@ -71,34 +70,35 @@ module.exports={
   },
 
 
-  updatecategorie: async (req,res) => {
-    try{
-        const result = await categoriemodel.updateOne({_id:req.params.id},req.body)
-        res.json({message:'categorie ', data:result,status:200});
-    } catch (error) {
-        console.log(error.message);
-        res.json({message:'error', data:null,status:500});
-    }
+  updatecategorie :function(req,res){
+
+    categoriemodel.findOneAndUpdate({_id:req.params.id},req.body,(err,categorie)=>{
+        
+        if (err) {
+            
+            res.json({message:'error update  one categorie'+err,data:null ,status:500})
+        } else {
+            
+            res.json({message:'one categorie updated', data:categorie ,status:200})
+        
+        }
+        
+        })
 },
 
 
-/*
-updatecategorie :function(req,res){
+// updatecategorie: async (req,res) => {
+//     try{
+//         const result = await categoriemodel.findOneAndUpdate({_id:req.params.id},req.body)
+//         res.json({message:'categorie ', data:result,status:200});
+//     } catch (error) {
+//         console.log(error.message);
+//         res.json({message:'error', data:null,status:500});
+//     }
+// },
 
-  categoriemodel.updateOne({_id:req.params.id},req.body,(err,users)=>{
-      if (err) {
-          
-          res.json({message:'error update  one user'+err,data:null ,status:500})
-      } else {
-          
-          res.json({message:'one user updated', data:users ,status:200})
-      
-      }
-      
-      })
-      
-},
-*/
+
+
 
 
 removecategorie: async (req,res) => {

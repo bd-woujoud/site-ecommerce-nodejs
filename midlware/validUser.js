@@ -19,13 +19,11 @@ data:null
         
     } 
     
-    else {
+    /*else {
         
 
-        /*req.body.userId=decoded.id    najmo na7iwha jemlaavec decoded eli fel function
-        console.log('decodeeed',decoded.id)*/
         next()
-    }
+    }*/
 
 
     })

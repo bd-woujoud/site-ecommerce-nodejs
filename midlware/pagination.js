@@ -3,7 +3,6 @@
 module.exports={
 
         paginatedResults:  function (model) {
-            console.log("aaaaaaaaa");
         return async (req, res, next) => {
           console.log('paraaaaaaaaaaams',req.params);
           const page =  parseInt(req.params.page) 
@@ -26,7 +25,7 @@ module.exports={
           try {
             results.results = await model.find().limit(limit).skip(startIndex).exec()
             res.paginatedResults = results
-            console.log("eeeeeeeeeeeeeeeeee",results);
+            console.log("eeeeeeeee",results);
             res.json({msg:"proooood",data:results})
             // next()
           } catch (e) {

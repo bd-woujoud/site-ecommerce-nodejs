@@ -1,4 +1,4 @@
-const bodyParser = require('body-parser')
+
 const sellermodel = require('../models/sellermodel')
 
 
@@ -9,15 +9,18 @@ module.exports={
 
     
     createseller: async (req, res) => {
+
         try { 
           const seller = new sellermodel(req.body);
-          const result = await seller.save();
+          const result = await seller.save(); //save in BD  :autre methode de ceation 
         
           res.send(result+" "+'seller created');
-        } catch (error) {
+        }
+         catch (error) {
           console.log(error.message);
           res.send(error+'err');
         }
+
     },
         
 

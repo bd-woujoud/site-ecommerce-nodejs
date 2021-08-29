@@ -1,7 +1,5 @@
-const bodyParser = require('body-parser')
+
 const subcategoriemodel = require('../models/subcategoriemodel')
-
-
 
 
 module.exports={
