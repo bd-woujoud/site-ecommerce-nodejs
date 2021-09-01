@@ -120,7 +120,8 @@ deleteUserById :function(req,res){
 
 updateUserById :function(req,res){
 
-    userModel.findOneAndUpdate({_id:req.params.id},req.body,{runValidators: true}/*runvalidator pour respecterla validation au fonction update*/,(err,users)=>{//bech naccedi lel contenu lkol mte3 lbody w nbadel kima n7eb kima n7eb
+    userModel.findOneAndUpdate({_id:req.params.id},req.body,{ runValidators: true, context: 'query' }
+    /*runvalidator pour respecterla validation au fonction update*/,(err,users)=>{//bech naccedi lel contenu lkol mte3 lbody w nbadel kima n7eb kima n7eb
         //userModel.updateOne({_id:req.params.id},{nom:req.body.nom,prenom:req.body.prenom},(err,users)=>{ ::bech tbadali el nom wel prenom eli fel id n...
         if (err) {
             

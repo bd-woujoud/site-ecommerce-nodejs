@@ -39,6 +39,9 @@ app.use('/product',productRouter);
 app.use('/categorie',categorieRouter);
 app.use('/commande',commandeRouter);
 
+app.get('/getfile/:image', function(req,res){
+  res.sendFile(__dirname + '/upload/' + req.params.image)//pour afficher limage:hezni lel dossier upload wafichili limage
+})
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // express doesn't consider not found 404 as an error so we need to handle 404 explicitly
 // handle 404 error
