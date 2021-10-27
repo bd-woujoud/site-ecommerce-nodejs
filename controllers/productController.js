@@ -14,7 +14,7 @@ createProduct:function(req,res){
 
             let img =req.file
             console.log('fiiiiiiilllleee',req.file.mimetype);
-            if(img.mimetype!=='image/png'){
+            if(img.mimetype!=='image/png'){    //mimteype  format 
               res.json({msg:'please enter a valid extention'})/////attachement
             }
             else{
@@ -148,8 +148,8 @@ sendimage: function (req, res) {
     service: 'Gmail',
   
     auth: {
-    user: 'wwwwboudhina@gmail.com',
-    pass: 'zoula1983'
+    user: '*******************',
+    pass: '***********'
     }
     });
 

@@ -10,7 +10,7 @@ const route= express.Router();
 
 route.post('/addUser',/*validation.validuser*/userController.createUser);
 
-route.get('/getUser',userController.getAllUser);/*:page*/
+route.get('/getUser',userController.getAllUser);/*getUser/:page* ajouter comme id pour pagination*/ 
 route.get('/getUserById/:id',userController.getUserById);
 route.delete('/deleteUserById/:id',userController.deleteUserById);
 route.put('/updateUserById/:id',userController.updateUserById);

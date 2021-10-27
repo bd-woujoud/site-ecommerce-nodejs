@@ -2,11 +2,14 @@
 const commandeModel = require('../models/commandeModel')
 
 
-
 module.exports={
 
 
+
+
     createcommande: async (req, res) => {
+
+      
         try { 
           const commande = new commandeModel(req.body);
           const result = await commande.save();
@@ -16,11 +19,11 @@ module.exports={
           console.log(error.message);
           res.json({message:'error', data:null,status:500});
         }
+
     },
 
 
 
-    
     getAllcommande: async (req, res) => {
         try { 
          

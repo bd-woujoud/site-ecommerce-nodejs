@@ -1,13 +1,8 @@
 
-
 const categoriemodel = require('../models/categoriemodel')
 
 
-
-
 module.exports={
-
-
 
 
     createNewcategorie: async (req, res) => {
@@ -15,7 +10,7 @@ module.exports={
           const categorie = new categoriemodel(req.body);
           const result = await categorie.save();
 
-        //   const result = await productModel.create(req.body)
+
           res.json({message:'new categorie created', data:result,status:200});
         } catch (error) {
 
@@ -85,20 +80,6 @@ module.exports={
         
         })
 },
-
-
-// updatecategorie: async (req,res) => {
-//     try{
-//         const result = await categoriemodel.findOneAndUpdate({_id:req.params.id},req.body)
-//         res.json({message:'categorie ', data:result,status:200});
-//     } catch (error) {
-//         console.log(error.message);
-//         res.json({message:'error', data:null,status:500});
-//     }
-// },
-
-
-
 
 
 removecategorie: async (req,res) => {

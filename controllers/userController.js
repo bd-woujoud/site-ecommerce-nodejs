@@ -91,10 +91,6 @@ getUserById :function(req,res){
 },
 
 
-
-
-
-
 deleteUserById :function(req,res){
 
     userModel.findByIdAndDelete({_id:req.params.id},(err,users)=>{
@@ -114,15 +110,11 @@ deleteUserById :function(req,res){
 
 } ,
 
-
-
-
-
 updateUserById :function(req,res){
 
     userModel.findOneAndUpdate({_id:req.params.id},req.body,{ runValidators: true, context: 'query' }
-    /*runvalidator pour respecterla validation au fonction update*/,(err,users)=>{//bech naccedi lel contenu lkol mte3 lbody w nbadel kima n7eb kima n7eb
-        //userModel.updateOne({_id:req.params.id},{nom:req.body.nom,prenom:req.body.prenom},(err,users)=>{ ::bech tbadali el nom wel prenom eli fel id n...
+    /*runvalidator pour respecter a validation au fonction update*/,(err,users)=>{
+        //userModel.updateOne({_id:req.params.id},{nom:req.body.nom,prenom:req.body.prenom},(err,users)=>{ :pour changer nom+prenion avec id n...
         if (err) {
             
             res.json({message:'error update  one user'+err,data:null ,status:500})
@@ -207,42 +199,40 @@ updateUserById :function(req,res){
 
 
 
-    
+   /*  
 sendMail: function (req, res) {
-   
+  
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'wwwwboudhina@gmail.com',
-      pass: 'zoula1983',
+      user: '***********',
+      pass: '***********',
     }
   });
   
   /*send statique var mailOptions = {
-    from: 'wwwwboudhina@gmail.com',
+    from: '***********',
     to: 'wejdenbdn94@gmail.com',
     subject: 'Sending Email using Node.js',
     text: 'That was easy!',
     html: "<b>(` mon text est ${text}`)</b>",*/
     
 //send dynamique
-
+/*
 var mailOptions = {
   from: req.body.from,
   to: req.body.to,
   subject:req.body.subject,
   text:req.body.text,
   
-/*
+
   attachments: [{
 
-          
+    
     filename: 'Forest.png',
-    path: 'C:/Users/Wejdane/Downloads/Forest.jpg',
-    cid: 'uniq-Forest.jpg'
+    path: '../upload/Forest.jpg',
   
-
-}],*/
+}],
 
       };
 
@@ -256,7 +246,51 @@ var mailOptions = {
   })
   
         
-  },
+  },*/
+
+
+//attachement dynamique
+
+  sendMail: function (req, res) {
+
+    var transporter = nodemailer.createTransport({
+        host: "smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: "3167714267a3c4",
+          pass: "0a6743a45787aa"    //acces with mailtrap
+        }
+      });
+
+    var mailOptions = {
+
+        from: req.body.from,
+        to: req.body.to,
+        subject: req.body.subject,
+        html: '<h1 style="font-size: 56px;">Welcome</h1><p>That was easy!</p>',
+        attachments: [
+           {
+
+               filename: req.file.filename,
+               path:'./upload/'+req.file.filename
+
+           }
+
+           
+       ]
+    };
+
+    transporter.sendMail(mailOptions, function (err, info) {
+       fs.unlinkSync('./upload/'+req.file.filename);//after download img ..deleted it
+        if (err) {
+            res.json({ message: 'error send mail' + err, data: null, status: 500 })
+        } else {
+            res.json({ message: "Message sent", status: 200, data: mailOptions })
+        }
+    });
+},
+
+
 
 
 
@@ -289,8 +323,8 @@ var mailOptions = {
                 var transporter4 = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: "wwwwboudhina@gmail.com",
-                        pass: 'zoula1983',
+                        user: "***********",
+                        pass: '************',
                     },
                 });
                 transporter4.sendMail(data, function (error, info) {

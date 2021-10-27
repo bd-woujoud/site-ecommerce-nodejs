@@ -286,12 +286,40 @@
           "parameters": [
             {
               "name": "user",
-              "in": "body",
+             "in": "formData",
               "description": "email that we want to sended",
               "schema": {
                 "$ref": "#/definitions/sendmail"
               }
-            }
+            },
+            {
+              "name": "subject",
+              "in": "formData",
+              "required": true,
+              "description": "subject of mail",
+              "type": "string"
+          },
+          {
+            "name": "text",
+            "in": "formData",
+            "required": true,
+            "description": "text",
+            "type": "string"
+        },
+        {
+        "name": "image",
+        "in": "formData",
+        "required": true,
+        "description": "image  that we want sended ",
+        "type": "file",
+        "items":{
+            "name":"image",
+            "type":"file",
+            "in":"formData",
+            "required": true,
+            "description": "image that we want to sended"
+        }
+    }
           ],
           "produces": [
             "application/json"
@@ -896,9 +924,13 @@
               }
           }
           ],
+
+
           "produces": [
             "multipart/form-data"
           ],
+
+
           "responses": {
             "200": {
               "description": "New product is created",
@@ -1447,8 +1479,13 @@
           "text": {
             "type": "string"
         
-          }
+          },
 
+
+          "image": {
+            "type": "string"
+        
+          }
         }
       },
   

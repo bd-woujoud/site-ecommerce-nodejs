@@ -72,7 +72,7 @@ module.exports={
 
   updateseller: async (req,res) => {
     try{
-        const result = await sellermodel.updateOne({_id:req.params.id},req.body,)
+        const result = await sellermodel.updateOne({_id:req.params.id},req.body)
         res.json({message:'seller updated', data:result,status:200});
     } catch (error) {
         console.log(error.message);

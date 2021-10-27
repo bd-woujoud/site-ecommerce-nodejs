@@ -38,7 +38,7 @@ var storage = multer.diskStorage({
    const  fileFilter = function (req, file, callback) {
         var ext = path.extname(file.originalname);
         if( ext !== '.png',ext !== '.jpeg',ext !== '.JPG',) {
-            return callback(new Error('Only images are allowed')) na7ina el filter hedha 5ater 7atinah nafso fel product controller
+            return callback(new Error('Only images are allowed'))   on supprime ce filter puisque on la ajouter en  product controller
         }
 
         if (file.mimetype == "text/*") {

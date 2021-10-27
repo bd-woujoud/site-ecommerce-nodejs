@@ -24,7 +24,7 @@ type_categorie:{
 
 subcategorie:[{
 
-    type:mongoose.Schema.Types.ObjectId,////plusieur  relation entre commande et user (1..*) donc juste nzido [] bech ywali 3anna tableau d'objet
+    type:mongoose.Schema.Types.ObjectId,////plusieur  relation entre commande et user (1..*) donc juste ajouter [] pour devient un tableau d'objet
     ref:"subcategorie"
     
     

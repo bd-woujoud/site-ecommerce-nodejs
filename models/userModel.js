@@ -42,7 +42,7 @@ const userSchema = new Schema({
         //       return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
         //     },
 
-        //     message: props /* propse el message eli bech yeketbo*/ => `${props.value} is not a valid email!`
+        //     message: props /* props qui s'affiche */ => `${props.value} is not a valid email!`
 
         //   },
  
@@ -104,11 +104,7 @@ ref:"commande"
 
 }]
 
-/*commandes:{
 
-  type:mongoose.Schema.Types.ObjectId,////////une seule relation entre commande et user (1)
-  ref:"commande"
-  }*/
 
 },
 
@@ -125,7 +121,7 @@ userSchema.plugin(uniqueValidator);
 
 userSchema.pre('save',function(next){
 
-this.password=bcrypt.hashSync(this.password,SaltRounds);
+this.password=bcrypt.hashSync(this.password,SaltRounds);//cryptage pasword
 next()
 
 })

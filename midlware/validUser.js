@@ -19,11 +19,7 @@ data:null
         
     } 
     
-    /*else {
-        
 
-        next()
-    }*/
 
 
     })
