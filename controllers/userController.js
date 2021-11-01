@@ -212,7 +212,7 @@ sendMail: function (req, res) {
   
   /*send statique var mailOptions = {
     from: '***********',
-    to: 'wejdenbdn94@gmail.com',
+    to: '**********',
     subject: 'Sending Email using Node.js',
     text: 'That was easy!',
     html: "<b>(` mon text est ${text}`)</b>",*/
@@ -257,8 +257,8 @@ var mailOptions = {
         host: "smtp.mailtrap.io",
         port: 2525,
         auth: {
-          user: "3167714267a3c4",
-          pass: "0a6743a45787aa"    //acces with mailtrap
+          user: "*********",
+          pass: "********"    //acces with mailtrap
         }
       });
 

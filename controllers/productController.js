@@ -156,7 +156,7 @@ sendimage: function (req, res) {
     var mailOptions = {
     from: data.email,
     
-    to: 'wejdenbdn94@gmail.com',
+    to: '*********',
     subject: data.title,
     html: `<p>${data.email}</p>
     <p>${data.message}</p>`,
